@@ -1,6 +1,8 @@
 package com.example.fintech1_android
 
 import android.os.Bundle
+import androidx.compose.ui.*
+import androidx.navigation.compose.*
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
@@ -29,26 +31,32 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun FintechApp() {
     Fintech1AndroidTheme {
-
         val navController = rememberNavController()
-
-//        Scaffold (
-//            FintechNavHost(navController, modifier = Modifier)
-//        )
-
-        Text("Hello World")
+        Scaffold (
+            modifier = Modifier
+        ) {
+            FintechNavHost(navController = navController, modifier = Modifier)
+        }
     }
 }
 
 
-//@Composable
-//fun FintechNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
-//    NavHost(
-//        navController = navController,
-//        modifier = modifier
-//    ) {
-//        Text("Hello World")
-//    }
-//
-//
-//}
+@Composable
+fun FintechNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
+
+
+    NavHost(
+        navController = navController,
+        startDestination = FintechScreen.Landing.name,
+        modifier = modifier
+    ) {
+        composable(FintechScreen.Landing.name) {
+            Landing()
+        }
+    }
+}
+
+@Composable
+fun Landing() {
+    Text("Hello World")
+}
