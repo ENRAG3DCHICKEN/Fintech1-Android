@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "148777979742",
+    "project_id": "fintech1-25164",
+    "storage_bucket": "fintech1-25164.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148777979742:android:11d1c02cffd8bf8b6089cf",
+        "android_client_info": {
+          "package_name": "com.example.fintech1_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148777979742-tuncoejt1fpr829t8if1en5d5uhoiplm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyTmhA2G86ST2arGIjr8zWKOgxu_IVCv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148777979742-tuncoejt1fpr829t8if1en5d5uhoiplm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "148777979742-3mm3brm472u4mbk23gqf91uiqvjorfuc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "IV.Fintech1.Fintech1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
