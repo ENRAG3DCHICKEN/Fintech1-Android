@@ -7,6 +7,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 enum class FintechScreen() {
     Landing(
     ),
+    Signup(
+    ),
+    Login(
+    ),
     AccountProfile(
     ),
     ChargePayment(
@@ -18,6 +22,8 @@ enum class FintechScreen() {
         fun fromRoute(route: String?): FintechScreen =
             when (route?.substringBefore("/")) {
                 Landing.name -> Landing
+                Signup.name -> Signup
+                Login.name -> Login
                 AccountProfile.name -> AccountProfile
                 ChargePayment.name -> ChargePayment
                 TransactionHistory.name -> TransactionHistory
