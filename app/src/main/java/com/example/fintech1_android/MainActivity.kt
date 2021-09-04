@@ -2,6 +2,7 @@ package com.example.fintech1_android
 import com.example.fintech1_android.ui.views.*
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -23,18 +24,29 @@ import com.example.fintech1_android.ui.theme.Fintech1AndroidTheme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.zxing.integration.android.IntentIntegrator
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             FintechApp(this)
         }
     }
-}
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+}
 
 @Composable
 fun FintechApp(context: ComponentActivity) {
@@ -65,6 +77,15 @@ fun FintechNavHost(navController: NavHostController, context: ComponentActivity,
         }
         composable(FintechScreen.Login.name) {
             Login(navController, context)
+        }
+        composable(FintechScreen.ChargePayment.name) {
+            ChargePayment(navController)
+        }
+        composable(FintechScreen.QR_Pay.name) {
+            QR_Pay(navController, context)
+        }
+        composable(FintechScreen.Face_Pay.name) {
+            Face_Pay(navController)
         }
     }
 }

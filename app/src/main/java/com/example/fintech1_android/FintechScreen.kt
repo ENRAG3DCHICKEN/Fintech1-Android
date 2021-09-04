@@ -11,6 +11,10 @@ enum class FintechScreen() {
     ),
     Login(
     ),
+    QR_Pay(
+    ),
+    Face_Pay(
+    ),
     AccountProfile(
     ),
     ChargePayment(
@@ -24,8 +28,10 @@ enum class FintechScreen() {
                 Landing.name -> Landing
                 Signup.name -> Signup
                 Login.name -> Login
-                AccountProfile.name -> AccountProfile
                 ChargePayment.name -> ChargePayment
+                QR_Pay.name -> QR_Pay
+                Face_Pay.name -> Face_Pay
+                AccountProfile.name -> AccountProfile
                 TransactionHistory.name -> TransactionHistory
                 null -> Landing
                 else -> throw IllegalArgumentException("Route $route is not recognized.")

@@ -28,6 +28,13 @@ fun Landing(navController: NavHostController) {
             Text(text = "Login")
         }
 
+        //TEST
+        Button(
+            onClick = { navController.navigate("ChargePayment") }
+        ) {
+            Text(text = "Charge Payment")
+        }
+
     }
 }
 
