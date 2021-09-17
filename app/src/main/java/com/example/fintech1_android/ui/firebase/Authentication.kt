@@ -12,8 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.content.SharedPreferences
-
-
+import com.google.firebase.firestore.ktx.firestore
 
 
 fun SignupUser(navController: NavHostController, context: ComponentActivity, email: String, password: String) {
@@ -26,16 +25,21 @@ fun SignupUser(navController: NavHostController, context: ComponentActivity, ema
     auth.createUserWithEmailAndPassword(email, password)
         .addOnCompleteListener(context) { task ->
             if (task.isSuccessful) {
+
                 // Sign in success, update UI with the signed-in user's information
                 Log.d(ContentValues.TAG, "createUserWithEmail:success")
-
-                navController.navigate("ChargePayment")
 
                 // Save the current user in Shared Preferences with key "CurrentUser"
                 val preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
                 val editor = preferences.edit()
                 editor.putString("CurrentUserUID", auth.currentUser?.uid)
                 editor.commit()
+
+                // Add the Flare Merchant User to the Admin DB
+                CreateFirestoreAdminEntry(email, auth.currentUser?.uid!!)
+
+                // Navigate to Charge Payment Screen
+                navController.navigate("ChargePayment")
 
             } else {
                 // If sign in fails, display a message to the user.
@@ -69,6 +73,9 @@ fun LoginUser(navController: NavHostController, context: ComponentActivity, emai
                 editor.putString("CurrentUserUID", auth.currentUser?.uid)
                 editor.commit()
 
+                // Debug Log
+                Log.wtf("CurrentUserUID", auth.currentUser?.uid!!)
+
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -77,3 +84,18 @@ fun LoginUser(navController: NavHostController, context: ComponentActivity, emai
             }
         }
 }
+
+fun CreateFirestoreAdminEntry(email: String, user: String) {
+
+    val entry = hashMapOf(
+        "email" to email,
+    )
+
+    val db = Firebase.firestore
+    db.collection("Admin").document(user)
+        .set(entry)
+        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+
+}
+
